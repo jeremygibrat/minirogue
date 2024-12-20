@@ -1,0 +1,78 @@
+.map-table {
+    border: 2px solid black;
+    width: 100%;
+
+    tr {
+        td {
+            width: 33%;
+            height: 100px;
+            border: 1px solid darkgrey;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cell-wall {
+            background-color: gray;
+        }
+
+        .cell-trap {
+            background-color: orange;
+        }
+
+        .cell-tomb {
+            background-color: chocolate;
+        }
+
+        .cell-campfire {
+            background-color: darksalmon;
+        }
+
+        .cell-shop {
+            background-color: darkolivegreen;
+        }
+
+        .cell-treasure {
+            background-color: gold;
+        }
+
+        .cell-sanctuary {
+            background-color: purple;
+        }
+
+        .cell-monster {
+            background-color: red;
+        }
+
+        .cell-object {
+            background-color: greenyellow;
+        }
+
+        .cell-exit {
+            background-color: darkred;
+        }
+
+        .cell-guardian {
+            background-color: darkred;
+        }
+
+        .cell-boss {
+            background-color: darkred;
+        }
+
+        .cell-exit {
+            border-color: 3px solid red;
+        }
+
+        .cell-player {
+            background-color: green;
+        }
+    }
+
+    .player-card {
+        border: 2px solid darkgrey;
+        padding: 10px;
+        background-color: whitesmoke;
+        margin: 10px;
+    }
+}

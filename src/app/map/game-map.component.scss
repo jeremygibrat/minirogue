@@ -1,0 +1,44 @@
+.game-map {
+    display: inline-block;
+    border: 2px solid black;
+}
+
+.map-row {
+    display: flex;
+}
+
+.map-cell {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.cell-wall {
+    background-color: gray;
+}
+
+.cell-treasure {
+    background-color: gold;
+}
+
+.cell-enemy {
+    background-color: red;
+}
+
+.cell-player {
+    background-color: green;
+}
+
+.controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.movement-buttons button {
+    margin: 5px;
+    padding: 10px;
+}

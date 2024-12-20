@@ -1,0 +1,23 @@
+<div class="combat-container">
+    <div class="characters">
+      <div class="player">
+        <h2>{{ player.name }}</h2>
+        <p>Points de vie : {{ player.currentHealth }}/{{ player.maxHealth }}</p>
+      </div>
+      <div class="monster">
+        <h2>{{ monster.name }}</h2>
+        <p>Points de vie : {{ monster.currentHealth }}/{{ monster.maxHealth }}</p>
+      </div>
+    </div>
+
+    <button (click)="startCombat()">Commencer le combat</button>
+
+    <div class="combat-log">
+      <h3>Journal de combat</h3>
+      <ul>
+        <li *ngFor="let log of combatLogs$ | async" [ngClass]="log.type">
+          {{ log.message }}
+        </li>
+      </ul>
+    </div>
+  </div>

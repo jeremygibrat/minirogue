@@ -1,0 +1,25 @@
+<div class="game-map">
+    <div *ngFor="let row of map$ | async; let y = index" class="map-row">
+        <div *ngFor="let cell of row; let x = index" class="map-cell" [ngClass]="{
+          'cell-wall': cell.type === 'wall',
+          'cell-treasure': cell.type === 'treasure',
+          'cell-enemy': cell.type === 'enemy',
+          'cell-player': playerPosition.x === x && playerPosition.y === y
+        }">
+            {{ cell.type === 'wall' ? '🧱' : '' }}
+            {{ cell.type === 'treasure' ? '💎' : '' }}
+            {{ cell.type === 'enemy' ? '👾' : '' }}
+        </div>
+    </div>
+</div>
+
+<div class="controls">
+    <div class="movement-buttons">
+        <button (click)="movePlayer('up')">⬆️ Haut</button>
+        <div>
+            <button (click)="movePlayer('left')">⬅️ Gauche</button>
+            <button (click)="movePlayer('right')">➡️ Droite</button>
+        </div>
+        <button (click)="movePlayer('down')">⬇️ Bas</button>
+    </div>
+</div>

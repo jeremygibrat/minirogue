@@ -1,0 +1,148 @@
+<router-outlet />
+<h1>#### Mini Rogue #### </h1>
+
+@if(gameInstance.combat.isFighting){
+<section>
+  <h2>Combat</h2>
+  <app-combat [enemy]="gameInstance.combat.monster" [hero]="gameInstance.combat.player"></app-combat>
+</section>
+}
+
+
+<!-- <section>
+  Map 2
+  <app-game-map></app-game-map>
+</section> -->
+
+<section>
+  <h2>Map</h2>
+
+  <hr />
+  @for(floor of gameInstance.world; track floor.label; let idFloor = $index){
+  @if(idFloor === gameInstance.currentTurn.level){
+  <div>
+    <h3>{{floor.label}}</h3>
+    <div>
+      @for(zone of floor?.rooms; track zone; let idZone = $index){
+      @if(idZone === gameInstance.currentTurn.floor){
+      <h4>Zone</h4>
+      <table class="map-table">
+        <tbody>
+          @for(room of zone; track room; let idy = $index){
+          <tr>
+            @for(cell of room; track cell; let idx = $index){
+            <td [ngClass]="{
+              'cell-trap': cell?.key === 'Trap',
+              'cell-tomb': cell?.key === 'Tomb',
+              'cell-campfire': cell?.key === 'Campfire',
+              'cell-shop': cell?.key === 'Shop',
+              'cell-treasure': cell?.key === 'Treasure',
+              'cell-sanctuary': cell?.key === 'Sanctuary',
+              'cell-monster': cell?.key === 'Monster',
+              'cell-object': cell?.key === 'Object',
+              'cell-wall': cell?.key === 'Wall',
+              'cell-exit': cell?.key === 'EXIT',
+              'cell-guardian': cell?.key === 'Guardian',
+              'cell-boss': cell?.key === 'Boss',
+            }">
+              <div>{{cell?.key}}</div>
+              <div>
+                {{ cell?.key === 'Wall' ? '🧱' : '' }}
+                {{ cell?.key === 'Treasure' ? '💎' : '' }}
+                {{ cell?.key === 'Monster' ? '👾' : '' }}
+              </div>
+              <div>x: {{idx}}, y: {{idy}}</div>
+              <div>
+                @for(player of getPlayerAtCell(idx, idy); track player){
+                <div class="player-card"><strong>{{player?.attributes?.name}}</strong>
+                  <div>
+                    @if(idx < 2) { <button (click)="navigate(player, 'right')">➡️ right</button>}
+
+                      @if(idy < 2) { <button (click)="navigate(player, 'bottom')">⬇️ bottom</button>}
+
+                        @if(idx === 2 && idy === 2){<button (click)="navigate(player)">NEXT</button>}
+
+                        @if(cell?.key === 'Monster' || cell?.key === 'Guardian' || cell?.key === 'Boss'){
+                        <button (click)="startFight(player, cell)">Start fight</button>
+                        <!-- <app-combat></app-combat> -->
+                        }
+                  </div>
+                </div>
+                }
+              </div>
+            </td>
+            }
+          </tr>
+          }
+        </tbody>
+      </table>
+      <br />
+      <!-- {{zone | json}} -->
+      }
+
+      }
+    </div>
+    <hr />
+
+  </div>
+  }
+
+
+  }
+</section>
+
+<br />
+<br />
+<br />
+<br />
+
+<section>
+  <hr />
+  <h2>Personnages</h2>
+  <hr />
+  @for(player of gameInstance.players; track player.name){
+  <dl>
+    <h3>{{player.name}} {{player.attributes.name}}</h3>
+
+    <dt>XP</dt>
+    <dd>{{player.attributes.xp}}/{{gameConfig.maxXp}}</dd>
+
+    <dt>ARMOR</dt>
+    <dd>{{player.attributes.armor}}/{{gameConfig.maxArmor}}</dd>
+
+    <dt>LIFE</dt>
+    <dd>{{player.attributes.life}}/{{gameConfig.maxLife}}</dd>
+
+    <dt>FOOD</dt>
+    <dd>{{player.attributes.food}}/{{gameConfig.maxFood}}</dd>
+
+    <dt>GOLD</dt>
+    <dd>{{player.attributes.gold}}/{{gameConfig.maxGold}}</dd>
+
+    <dt>SPELL</dt>
+    <dd>{{player.attributes.spell}}</dd>
+
+    <dt>POTION</dt>
+    <dd>{{player.attributes.potion}}</dd>
+
+    <dt>SKILLS</dt>
+    <dd>
+      @for(skill of player.attributes.skills; track skill.label){
+      <li>{{skill.label}} ({{skill.type}})</li>
+      <small>{{skill.description}}</small>
+      }
+    </dd>
+
+    <dt>EFFECTS</dt>
+    <dd>
+      @for(effect of player.attributes.effects; track effect.label){
+      <li>{{effect.label}} ({{effect.type}})</li>
+      <small>{{effect.description}}</small>
+      }
+    </dd>
+
+
+  </dl>
+  }
+
+</section>
